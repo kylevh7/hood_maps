@@ -1,14 +1,18 @@
 import React, {Component} from 'react';
-import {withScriptjs, withGoogleMap, GoogleMap, Marker} from "react-google-maps";
+import {withScriptjs,InfoWindow, withGoogleMap, GoogleMap, Marker} from "react-google-maps";
 import axios from 'axios';
 
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) => <GoogleMap zoom={props.zoom} center={props.center}>
-    {
-        props.markers && props.markers.filter(marker => marker.isVisable).map((marker, index) => <Marker key={index} position={{
-                lat: marker.lat,
-                lng: marker.lng
-            }}/>)
+
+    { props.markers && props.markers.filter(marker => marker.isVisable).map((marker,name,index) => <Marker key={index} position={{lat: marker.lat,lng: marker.lng}}>
+    <InfoWindow>
+        <p></p>
+    </InfoWindow>
+</Marker>
+
+)
+
     }
 </GoogleMap>))
 
@@ -27,6 +31,8 @@ class MapContainer extends Component {
         this.getPlaces()
     }
 
+
+
     getPlaces = () => {
         const endPoint = "https://api.foursquare.com/v2/venues/search?";
         const params = {
@@ -42,13 +48,12 @@ class MapContainer extends Component {
             const venues = response.data.response.venues;
             const center = response.data.response.geocode.feature.geometry.center;
             const markers = venues.map(venue => {
-                return {lat: venue.location.lat, lng: venue.location.lng, isOpen: false, isVisable: true}
+                return {lat: venue.location.lat, lng: venue.location.lng, isOpen: false, isVisable: true, name: venue.name}
             })
             this.setState({venues, center, markers});
             console.log(markers)
-
         }).catch(err => {
-            console.log("UghOhhh" + err)
+            console.log(err)
         })
     }
 
