@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withScriptjs, withGoogleMap, GoogleMap, Marker} from "react-google-maps";
 import axios from 'axios';
 
+
 const MyMapComponent = withScriptjs(withGoogleMap((props) => <GoogleMap zoom={props.zoom} center={props.center}>
     {
         props.markers && props.markers.filter(marker => marker.isVisable).map((marker, index) => <Marker key={index} position={{
@@ -52,7 +53,8 @@ class MapContainer extends Component {
     }
 
     render() {
-        return (<MyMapComponent zoom={this.state.zoom} center={this.state.center} markers={this.state.markers} isMarkerShown="isMarkerShown" googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places" loadingElement={<div style = {{ height: `100%` }}/>} containerElement={<div style = {{ height: `400px` }}/>} mapElement={<div style = {{ height: `100%` }}/>}/>)
+        return (<MyMapComponent zoom={this.state.zoom} center={this.state.center} markers={this.state.markers} isMarkerShown="isMarkerShown" googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD-ceCUOPuTZyturppPcZaHKA9REttJa-0"
+ loadingElement={<div style = {{ height: `100%` }}/>} containerElement={<div style = {{ height: `80vh` }}/>} mapElement={<div style = {{ height: `100%` }}/>}/>)
     };
 };
 export default MapContainer;
