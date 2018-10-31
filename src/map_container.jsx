@@ -5,16 +5,15 @@ import axios from 'axios';
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) => <GoogleMap zoom={props.zoom} center={props.center}>
 
-    { props.markers && props.markers.filter(marker => marker.isVisable).map((marker,name,index) => <Marker key={index} position={{lat: marker.lat,lng: marker.lng}}>
-    <InfoWindow>
-        <p></p>
+     {props.markers && props.markers.filter(marker => marker.isVisable).map((marker,name,index) => <Marker key={name} position={{lat: marker.lat,lng: marker.lng}} onClick={()=>props.infoWindow(marker)}>
+    {marker.isOpen && (<InfoWindow>
+        <p>hellp</p>
     </InfoWindow>
-</Marker>
+    )}
+</Marker>)}
 
-)
-
-    }
 </GoogleMap>))
+
 
 class MapContainer extends Component {
     constructor() {
@@ -31,8 +30,10 @@ class MapContainer extends Component {
         this.getPlaces()
     }
 
-
-
+    infoWindow=(marker)=>{
+        marker.isOpen=true;
+        this.setState({markers: Object.assign(this.state.markers, marker)})
+    }
     getPlaces = () => {
         const endPoint = "https://api.foursquare.com/v2/venues/search?";
         const params = {
@@ -51,14 +52,16 @@ class MapContainer extends Component {
                 return {lat: venue.location.lat, lng: venue.location.lng, isOpen: false, isVisable: true, name: venue.name}
             })
             this.setState({venues, center, markers});
-            console.log(markers)
+            console.log(markers.map(isOpen=>{return isOpen.isOpen}))
         }).catch(err => {
             console.log(err)
         })
     }
 
     render() {
-        return (<MyMapComponent zoom={this.state.zoom} center={this.state.center} markers={this.state.markers} isMarkerShown="isMarkerShown" googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD-ceCUOPuTZyturppPcZaHKA9REttJa-0"
+        return (<MyMapComponent zoom={this.state.zoom} center={this.state.center} markers={this.state.markers}
+        infoWindow={this.infoWindow}
+        isMarkerShown="isMarkerShown" googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD-ceCUOPuTZyturppPcZaHKA9REttJa-0"
  loadingElement={<div style = {{ height: `100%` }}/>} containerElement={<div style = {{ height: `80vh` }}/>} mapElement={<div style = {{ height: `100%` }}/>}/>)
     };
 };
