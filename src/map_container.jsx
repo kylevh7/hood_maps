@@ -29,11 +29,20 @@ class MapContainer extends Component {
     componentDidMount() {
         this.getPlaces()
     }
+    closeWindow=()=>{
+        const marker=this.state.markers.map(marker=>{
+            marker.isOpen=false;
+            return marker
+        })
+        this.setState({markers: Object.assign(this.state.markers,marker)})
+    }
 
     infoWindow=(marker)=>{
+        this.closeWindow();
         marker.isOpen=true;
         this.setState({markers: Object.assign(this.state.markers, marker)})
     }
+
     getPlaces = () => {
         const endPoint = "https://api.foursquare.com/v2/venues/search?";
         const params = {
