@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+#search{
+    background-color: gray;
+    height: 20vh;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
