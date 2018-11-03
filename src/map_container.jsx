@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withScriptjs, InfoWindow, withGoogleMap, GoogleMap, Marker} from "react-google-maps";
 import axios from 'axios';
-import Search from "./Search"
+
 
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) => <GoogleMap zoom={props.zoom} center={props.center}>
@@ -24,7 +24,7 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) => <GoogleMap zoom={pr
             }
         </Marker>)
     }
-    <Search/>
+
 </GoogleMap>))
 
 class MapContainer extends Component {
@@ -115,7 +115,7 @@ class MapContainer extends Component {
 
     render() {
         return (<MyMapComponent zoom={this.state.zoom} center={this.state.center} markers={this.state.markers} infoWindow={this.infoWindow} photos={this.state.photos}  isMarkerShown="isMarkerShown"
-        combineFunctions={this.combineFunctions} googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD-ceCUOPuTZyturppPcZaHKA9REttJa-0" loadingElement={<div style = {{ height: `100%` }}/>} containerElement={<div style = {{ height: `80vh` }}/>} mapElement={<div style = {{ height: `100%` }}/>}/>)
+        combineFunctions={this.combineFunctions} googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD-ceCUOPuTZyturppPcZaHKA9REttJa-0" loadingElement={<div style = {{ height: `100%` }}/>} containerElement={<div style = {{ height: `100vh`, width:`80vw` }}/>} mapElement={<div style = {{ height: `100%` }}/>}/>)
     };
 };
 export default MapContainer;
