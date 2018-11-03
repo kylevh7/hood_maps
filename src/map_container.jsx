@@ -18,7 +18,7 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) => <GoogleMap zoom={pr
                 marker.isOpen && (<InfoWindow>
                     <div>
                         <img src={`${props.photos.prefix}200x200${props.photos.suffix}`} alt={"image of " + marker.name}/>
-                        <p></p>
+                        <p>{marker.name}</p>
                     </div>
                 </InfoWindow>)
             }
@@ -61,9 +61,10 @@ class MapContainer extends Component {
         this.setState({
             markers: Object.assign(this.state.markers,marker)
         });
+    }
 
 
-    (() => {
+getPhotos=(marker)=>{
         const id=marker.id
         console.log(id);
         const photoSearch = "https://api.foursquare.com/v2/venues/"+id+"/photos?"
@@ -85,8 +86,8 @@ class MapContainer extends Component {
         }).catch(err=>{
             console.log(err)
         })
-    })()
-}
+    }
+
 
     getPlaces = () => {
         const localSearch = "https://api.foursquare.com/v2/venues/search?";
