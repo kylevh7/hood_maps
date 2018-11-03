@@ -61,10 +61,8 @@ class MapContainer extends Component {
         this.setState({
             markers: Object.assign(this.state.markers,marker)
         });
-    }
 
-
-getPhotos=(marker)=>{
+(()=>{
         const id=marker.id
         console.log(id);
         const photoSearch = "https://api.foursquare.com/v2/venues/"+id+"/photos?"
@@ -86,8 +84,8 @@ getPhotos=(marker)=>{
         }).catch(err=>{
             console.log(err)
         })
-    }
-
+    })()
+}
 
     getPlaces = () => {
         const localSearch = "https://api.foursquare.com/v2/venues/search?";
