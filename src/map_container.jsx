@@ -41,6 +41,11 @@ class MapContainer extends Component {
     componentDidMount() {
         this.getPlaces()
     }
+    handleChange=(e)=>{
+        e.preventDefault();
+        console.log("handleing Change")
+    }
+
     listItem=venue=>{
         const marker=this.state.markers.find(marker=> marker.id===venue.id)
     this.infoWindow(marker)
@@ -122,7 +127,7 @@ class MapContainer extends Component {
     render() {
         return (
             <React.Fragment>
-            <Sidebar {...this.state} listItem={this.listItem} />
+            <Sidebar {...this.state} listItem={this.listItem} handleChange={this.handleChange} />
         <MyMapComponent zoom={this.state.zoom} center={this.state.center} markers={this.state.markers} infoWindow={this.infoWindow} photos={this.state.photos} isMarkerShown="isMarkerShown" combineFunctions={this.combineFunctions} googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD-ceCUOPuTZyturppPcZaHKA9REttJa-0" loadingElement={<div style = {{ height: `100%` }}/>} containerElement={<div style = {{ height: `100vh`, width:`100vw` }}/>} mapElement={<div style = {{ height: `100%` }}/>}/>
         </React.Fragment>
     )
