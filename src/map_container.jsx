@@ -91,7 +91,7 @@ class MapContainer extends Component {
             client_secret: "OP1FJ5MLN22TKJWGYZDQEXA51A0APPSUFNCAU2S0WNEBD2ZG",
             query: "pizza",
             near: "Cadillac, MI",
-            limit: 20,
+            limit: 10,
             v: "20181027"
         }
 
@@ -118,7 +118,7 @@ class MapContainer extends Component {
     render() {
         return (
             <React.Fragment>
-            <Sidebar />
+            <Sidebar {...this.state} />
         <MyMapComponent zoom={this.state.zoom} center={this.state.center} markers={this.state.markers} infoWindow={this.infoWindow} photos={this.state.photos} isMarkerShown="isMarkerShown" combineFunctions={this.combineFunctions} googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD-ceCUOPuTZyturppPcZaHKA9REttJa-0" loadingElement={<div style = {{ height: `100%` }}/>} containerElement={<div style = {{ height: `100vh`, width:`100vw` }}/>} mapElement={<div style = {{ height: `100%` }}/>}/>
         </React.Fragment>
     )

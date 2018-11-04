@@ -6,11 +6,7 @@ class Venuelist extends Component {
         return(
             <div id="venue">
                 <ol id="ol">
-                <Listitem />
-                <Listitem />
-                <Listitem />
-                <Listitem />
-                <Listitem />
+                {this.props.venues && this.props.venues.map((venue, index)=><Listitem key={index} {...venue} />)}
                 </ol>
             </div>
         )
