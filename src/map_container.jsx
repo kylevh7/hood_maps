@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {withScriptjs, InfoWindow, withGoogleMap, GoogleMap, Marker} from "react-google-maps";
 import axios from 'axios';
+import Sidebar from './sideBar'
 
 
 
@@ -23,6 +24,7 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) => <GoogleMap zoom={pr
                 </InfoWindow>)
             }
         </Marker>)
+
     }
 
 </GoogleMap>))
@@ -92,8 +94,8 @@ class MapContainer extends Component {
         const searchParams = {
             client_id: "G15TPMV3XGKPDH0QEY4BMFMZMRJAQ4CUTIKL0KXAPQXPVA5I",
             client_secret: "OP1FJ5MLN22TKJWGYZDQEXA51A0APPSUFNCAU2S0WNEBD2ZG",
-            query: "coffee",
-            near: "chicago",
+            query: "pizza",
+            near: "Cadillac, MI",
             limit: 20,
             v: "20181027"
         }
@@ -115,7 +117,10 @@ class MapContainer extends Component {
 
     render() {
         return (<MyMapComponent zoom={this.state.zoom} center={this.state.center} markers={this.state.markers} infoWindow={this.infoWindow} photos={this.state.photos}  isMarkerShown="isMarkerShown"
-        combineFunctions={this.combineFunctions} googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD-ceCUOPuTZyturppPcZaHKA9REttJa-0" loadingElement={<div style = {{ height: `100%` }}/>} containerElement={<div style = {{ height: `100vh`, width:`80vw` }}/>} mapElement={<div style = {{ height: `100%` }}/>}/>)
+        combineFunctions={this.combineFunctions} googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD-ceCUOPuTZyturppPcZaHKA9REttJa-0" loadingElement={<div style = {{ height: `100%` }}/>} containerElement={<div style = {{ height: `100vh`, width:`100vw` }}/>} mapElement={<div style = {{ height: `100%` }}/>}/>
+
+    )
     };
+
 };
 export default MapContainer;

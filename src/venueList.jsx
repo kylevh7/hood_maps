@@ -5,7 +5,11 @@ class Venuelist extends Component {
     render(){
         return(
             <div id="venue">
-                <ol>
+                <ol id="ol">
+                <Listitem />
+                <Listitem />
+                <Listitem />
+                <Listitem />
                 <Listitem />
                 </ol>
             </div>
