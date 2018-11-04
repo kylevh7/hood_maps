@@ -5,6 +5,8 @@
   display: flex;
   flex-flow: row;
 }
+
+
 #venue{
     padding: 1rem;
     margin: auto;
