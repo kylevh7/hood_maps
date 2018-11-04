@@ -7,7 +7,7 @@ class Sidebar extends Component {
         return(
             <div id="sideBar">
                 <input type={"search"} id={"search"} placeholder={"filter locations"} />
-                <Venuelist {...this.props} />
+                <Venuelist {...this.props} listItem={this.props.listItem} />
             </div>
         )
     }
