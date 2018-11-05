@@ -3,7 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 
 Hello!
-Thank you for reviewing my app.
+
 Thank you for reviewing my app!
 
 To get started you must have node.js and npm installed. Then:
