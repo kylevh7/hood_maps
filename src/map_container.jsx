@@ -6,10 +6,10 @@ import Sidebar from './sideBar'
 const MyMapComponent = withScriptjs(withGoogleMap((props) => <GoogleMap zoom={props.zoom} center={props.center}>
 
     {
-        props.markers && props.markers.filter(marker => marker.isVisable).map((marker, index) => <Marker key={index} position={{
+        props.markers && props.markers.filter(marker => marker.isVisable).map((marker, index) => <Marker  key={index} position={{
                 lat: marker.lat,
                 lng: marker.lng
-            }} onClick={() => {
+            }}animation={marker.isOpen && props.animation}  onClick={() => {
                 props.infoWindow(marker)
             }}>
             {
@@ -30,27 +30,27 @@ class MapContainer extends Component {
     constructor() {
         super()
         this.state = {
-            search:"",
             venues: [],
             center: [],
             markers: [],
             photos: {},
-            zoom: 11
+            zoom: 11,
+            animation:""
         }
-        this.handleChange=this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
         this.getPlaces()
     }
 
-    handleChange=(val)=>{
+    handleChange = (val) => {
         this.getPlaces(val)
     }
 
-    listItem=venue=>{
-        const marker=this.state.markers.find(marker=> marker.id===venue.id)
-    this.infoWindow(marker)
+    listItem = venue => {
+        const marker = this.state.markers.find(marker => marker.id === venue.id)
+        this.infoWindow(marker)
     }
 
     closeWindow = () => {
@@ -59,16 +59,20 @@ class MapContainer extends Component {
             return marker
         })
         this.setState({
-            markers: Object.assign(this.state.markers, marker)
+            markers: Object.assign(this.state.markers, marker),
+            animation:""
         })
     }
 
     infoWindow = (marker) => {
+        const bounce=window.google.maps.Animation.BOUNCE;
         this.closeWindow();
         marker.isOpen = true;
         this.setState({
-            markers: Object.assign(this.state.markers, marker)
+            markers: Object.assign(this.state.markers, marker),
+            animation:bounce
         });
+
 
         (() => {
             const id = marker.id
@@ -95,12 +99,13 @@ class MapContainer extends Component {
         })()
     }
 
+
     getPlaces = (val) => {
         const localSearch = "https://api.foursquare.com/v2/venues/search?";
         const searchParams = {
             client_id: "G15TPMV3XGKPDH0QEY4BMFMZMRJAQ4CUTIKL0KXAPQXPVA5I",
             client_secret: "OP1FJ5MLN22TKJWGYZDQEXA51A0APPSUFNCAU2S0WNEBD2ZG",
-            query:val,
+            query: val,
             near: "Cadillac, MI",
             limit: 10,
             v: "20181027"
@@ -127,12 +132,10 @@ class MapContainer extends Component {
     }
 
     render() {
-        return (
-            <React.Fragment>
-            <Sidebar {...this.state} listItem={this.listItem} handleChange={this.handleChange} />
-        <MyMapComponent zoom={this.state.zoom} center={this.state.center} markers={this.state.markers} infoWindow={this.infoWindow} photos={this.state.photos} isMarkerShown="isMarkerShown" combineFunctions={this.combineFunctions} googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD-ceCUOPuTZyturppPcZaHKA9REttJa-0" loadingElement={<div style = {{ height: `100%` }}/>} containerElement={<div style = {{ height: `100vh`, width:`100vw` }}/>} mapElement={<div style = {{ height: `100%` }}/>}/>
-        </React.Fragment>
-    )
+        return (<React.Fragment>
+            <Sidebar {...this.state} listItem={this.listItem} handleChange={this.handleChange}/>
+            <MyMapComponent zoom={this.state.zoom} center={this.state.center} markers={this.state.markers} animation={this.state.animation} infoWindow={this.infoWindow} photos={this.state.photos} isMarkerShown="isMarkerShown" combineFunctions={this.combineFunctions} googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD-ceCUOPuTZyturppPcZaHKA9REttJa-0" loadingElement={<div style = {{ height: `100%` }}/>} containerElement={<div style = {{ height: `100vh`, width:`100vw` }}/>} mapElement={<div style = {{ height: `100%` }}/>}/>
+        </React.Fragment>)
     };
 
 };
