@@ -76,7 +76,6 @@ class MapContainer extends Component {
 
         (() => {
             const id = marker.id
-            console.log(id);
             const photoSearch = "https://api.foursquare.com/v2/venues/" + id + "/photos?"
             const photoParams = {
                 client_id: "G15TPMV3XGKPDH0QEY4BMFMZMRJAQ4CUTIKL0KXAPQXPVA5I",
@@ -92,7 +91,6 @@ class MapContainer extends Component {
                     suffix: suffix
                 }
                 this.setState({photos})
-                console.log(res)
             }).catch(err => {
                 console.log(err)
             })
@@ -112,7 +110,6 @@ class MapContainer extends Component {
         }
 
         axios.get(localSearch + new URLSearchParams(searchParams)).then(response => {
-            console.log(response)
             const venues = response.data.response.venues;
             const center = response.data.response.geocode.feature.geometry.center;
             const markers = venues.map(venue => {
