@@ -45,8 +45,6 @@ class MapContainer extends Component {
     }
 
     handleChange=(val)=>{
-        this.setState({search:val})
-        console.log(this.state.search)
         this.getPlaces(val)
     }
 
@@ -97,12 +95,12 @@ class MapContainer extends Component {
         })()
     }
 
-    getPlaces = () => {
+    getPlaces = (val) => {
         const localSearch = "https://api.foursquare.com/v2/venues/search?";
         const searchParams = {
             client_id: "G15TPMV3XGKPDH0QEY4BMFMZMRJAQ4CUTIKL0KXAPQXPVA5I",
             client_secret: "OP1FJ5MLN22TKJWGYZDQEXA51A0APPSUFNCAU2S0WNEBD2ZG",
-            query:this.state.search,
+            query:val,
             near: "Cadillac, MI",
             limit: 10,
             v: "20181027"
