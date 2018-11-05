@@ -4,13 +4,11 @@ import './App.css';
 import Sidebar from './sideBar'
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-          <MapContainer />
-      </div>
-    );
-  }
+    render() {
+        return (<div className="App" role="application">
+            <MapContainer/>
+        </div>);
+    }
 }
 
 export default App;

@@ -6,7 +6,8 @@ import Sidebar from './sideBar'
 const MyMapComponent = withScriptjs(withGoogleMap((props) => <GoogleMap zoom={props.zoom} center={props.center}>
 
     {
-        props.markers && props.markers.filter(marker => marker.isVisable).map((marker, index) => <Marker  key={index} position={{
+        props.markers && props.markers.filter(marker => marker.isVisable).map((marker, index) => <Marker  key={index}
+        position={{
                 lat: marker.lat,
                 lng: marker.lng
             }}animation={marker.isOpen && props.animation}  onClick={() => {
@@ -73,7 +74,6 @@ class MapContainer extends Component {
             animation:bounce
         });
 
-
         (() => {
             const id = marker.id
             console.log(id);
@@ -134,7 +134,7 @@ class MapContainer extends Component {
     render() {
         return (<React.Fragment>
             <Sidebar {...this.state} listItem={this.listItem} handleChange={this.handleChange}/>
-            <MyMapComponent zoom={this.state.zoom} center={this.state.center} markers={this.state.markers} animation={this.state.animation} infoWindow={this.infoWindow} photos={this.state.photos} isMarkerShown="isMarkerShown" combineFunctions={this.combineFunctions} googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD-ceCUOPuTZyturppPcZaHKA9REttJa-0" loadingElement={<div style = {{ height: `100%` }}/>} containerElement={<div style = {{ height: `100vh`, width:`100vw` }}/>} mapElement={<div style = {{ height: `100%` }}/>}/>
+            <MyMapComponent zoom={this.state.zoom} center={this.state.center} markers={this.state.markers} animation={this.state.animation} infoWindow={this.infoWindow} photos={this.state.photos} isMarkerShown="isMarkerShown" combineFunctions={this.combineFunctions} googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyD-ceCUOPuTZyturppPcZaHKA9REttJa-0" loadingElement={<div style = {{ height: `100vh` }}/>} containerElement={<div style = {{ height: `100vh`, width:`100vw` }}/>} mapElement={<div style = {{ height: `100vh` }}/>}/>
         </React.Fragment>)
     };
 
