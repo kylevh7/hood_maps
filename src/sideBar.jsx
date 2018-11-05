@@ -9,7 +9,7 @@ class Sidebar extends Component {
     const val = this.myValue.value
     this.props.handleChange(val)
     }
-    
+
     render() {
         return (<div id="sideBar">
             <form>
@@ -20,8 +20,7 @@ class Sidebar extends Component {
                         ref={(value)=>this.myValue=value}
                         onChange={this.textValue.bind(this)}
                         placeholder={"Search locations"}/>
-                </label>
-                <input type={"submit"} value={"Search"}/>
+                </label>                
             </form>
 
             <Venuelist {...this.props} listItem={this.props.listItem}/>
