@@ -30,20 +30,24 @@ class MapContainer extends Component {
     constructor() {
         super()
         this.state = {
+            search:"",
             venues: [],
             center: [],
             markers: [],
             photos: {},
             zoom: 11
         }
+        this.handleChange=this.handleChange.bind(this);
     }
 
     componentDidMount() {
         this.getPlaces()
     }
-    handleChange=(e)=>{
-        e.preventDefault();
-        console.log("handleing Change")
+
+    handleChange=(val)=>{
+        this.setState({search:val})
+        console.log(this.state.search)
+        this.getPlaces(val)
     }
 
     listItem=venue=>{
@@ -98,7 +102,7 @@ class MapContainer extends Component {
         const searchParams = {
             client_id: "G15TPMV3XGKPDH0QEY4BMFMZMRJAQ4CUTIKL0KXAPQXPVA5I",
             client_secret: "OP1FJ5MLN22TKJWGYZDQEXA51A0APPSUFNCAU2S0WNEBD2ZG",
-            query: "pizza",
+            query:this.state.search,
             near: "Cadillac, MI",
             limit: 10,
             v: "20181027"
